@@ -5,6 +5,8 @@ RUN apt-get update && \
     pkg-config \
     xorg-dev \
     libx11-dev \
+    hyperfine \
+    neovim \
     && apt-get clean && rm -rf /var/lib/apt/lists/*
 
 WORKDIR /opt/gpu_cpp
