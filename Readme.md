@@ -75,3 +75,40 @@ hyperfine "./monte_carlo_pi_cpu" "./monte_carlo_pi_gpu" --warmup 10 -N
 ```
 
 Explique o resultado (diferença nos tempos).
+
+## OpenACC
+
+- https://openacc-best-practices-guide.readthedocs.io/en/latest/01-Introduction.html
+- https://enccs.github.io/OpenACC-CUDA-beginners/1.02_openacc-introduction/
+- https://github-pages.ucl.ac.uk/research-computing-with-cpp/08openmp/02_intro_openmp.html
+
+
+```bash
+code ./src/openacc
+
+docker run -it --rm \
+  --gpus all \
+  -v "$(pwd)/src:/opt/gpu_cpp" \
+  -w "/opt/gpu_cpp/openacc/" \
+  gpu_cpp
+
+make
+```
+
+### Exercício
+
+Mude o tamanho dos vetores para pelo menos 3 valores diferentes nas três
+implementações (`./src/openacc/saxpy_oacc.cpp`, `./src/openacc/saxpy_omp.cpp` e
+`./src/openacc/saxpy_serial.cpp`):
+
+```cpp
+constexpr std::size_t N = 1 << 24;
+```
+
+Para cada valor, rode o benchmark:
+
+```bash
+hyperfine --warmup 10 ./saxpy_serial ./saxpy_oacc ./saxpy_omp
+```
+
+Compare os resultados.
