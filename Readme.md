@@ -112,3 +112,27 @@ hyperfine --warmup 10 ./saxpy_serial ./saxpy_oacc ./saxpy_omp
 ```
 
 Compare os resultados.
+
+## OpenCL, SYCL
+
+- https://github.com/KhronosGroup/OpenCL-Guide/blob/main/chapters/how_does_opencl_work.md
+- https://www.intel.com/content/www/us/en/developer/articles/technical/quick-guide-to-sycl-implementations.html
+
+- SYCL (intel): https://godbolt.org/z/rxzK89orE
+- OpenCL: https://godbolt.org/z/s67cWzMeK
+
+## std::exec
+
+- https://github.com/NVIDIA/stdexec
+
+```bash
+code ./src/stdexec/
+
+docker run -it --rm \
+  --gpus all \
+  -v "$(pwd)/src:/opt/gpu_cpp" \
+  -w "/opt/gpu_cpp/stdexec/" \
+  gpu_cpp
+
+make
+```
